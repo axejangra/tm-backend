@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const Task = require('./models/Task')
+require('dotenv').config()
+const DATABASE = process.env.DATABASE;
 
 const { Schema } = mongoose;
 
@@ -18,7 +20,7 @@ app.use(bodyParser.json());
 main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/")}
+  await mongoose.connect(DATABASE)}
   console.log("connected to mongodb success");
 
 
@@ -55,7 +57,7 @@ app.delete('/tasks/:id', async (req, res) => {
 });
 
 // Start the server
-const port = 8080;
+const port = process.env.PORT || 8081;
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
