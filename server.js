@@ -39,7 +39,7 @@ app.post('/tasks', async (req, res) => {
 });
 
 app.put('/tasks/:id', async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params.id;
   const { title, description } = req.body;
   await Task.findByIdAndUpdate(id, { title, description });
   res.json({ message: 'Task updated successfully' });
@@ -47,7 +47,7 @@ app.put('/tasks/:id', async (req, res) => {
 
 app.delete('/tasks/:id', async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params.id;
       await Task.findByIdAndRemove(id);
       res.json({ message: 'Task deleted successfully' });
     
